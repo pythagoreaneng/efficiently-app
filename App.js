@@ -42,7 +42,7 @@ export default function App() {
     "December",
   ];
 
-  const nth = () => {
+  const nth = (d) => {
     if (d > 3 && d < 21) return "th";
     switch (d % 10) {
       case 1:
@@ -61,7 +61,7 @@ export default function App() {
       <View style={styles.taskWrapper}>
         <Text style={styles.sectionTitle}>
           {months[d.getMonth()]} {d.getDate()}
-          {nth()}
+          {nth(d.getDate())}
         </Text>
 
         <View style={styles.items}>
