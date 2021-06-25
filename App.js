@@ -25,10 +25,44 @@ export default function App() {
     itemsCopy.splice(index, 1);
     setTaskItems(itemsCopy);
   };
+
+  let d = new Date();
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const nth = () => {
+    if (d > 3 && d < 21) return "th";
+    switch (d % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.taskWrapper}>
-        <Text style={styles.sectionTitle}>Today's tasks</Text>
+        <Text style={styles.sectionTitle}>
+          {months[d.getMonth()]} {d.getDate()}
+          {nth()}
+        </Text>
 
         <View style={styles.items}>
           {taskItems.map((item, index) => {
@@ -47,7 +81,7 @@ export default function App() {
       >
         <TextInput
           style={styles.input}
-          placeholder={"Write a task"}
+          placeholder={"#DoEfficiently"}
           value={task}
           onChangeText={(text) => setTask(text)}
         />
@@ -74,6 +108,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: "bold",
+    color: "#46BCFF",
   },
   items: {
     marginTop: 30,
@@ -98,12 +133,15 @@ const styles = StyleSheet.create({
   addWrapper: {
     width: 60,
     height: 60,
-    backgroundColor: "#FFF",
+    backgroundColor: "#232323",
     borderRadius: 60,
     justifyContent: "center",
     alignItems: "center",
     borderColor: "#C0C0C0",
     borderWidth: 1,
   },
-  addText: {},
+  addText: {
+    fontSize: 40,
+    color: "#fff",
+  },
 });
