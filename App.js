@@ -8,22 +8,26 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
+  Button,
 } from "react-native";
 import Task from "./components/Task";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   return (
     <View>
-      <Text>Home Screen</Text>
+      <Text style={styles.homeButtonWrapper}>Efficiently App</Text>
+      <Button
+        style={styles.homeButtonWrapper}
+        title="Tasks"
+        onPress={() => navigation.navigate("Tasks")}
+      />
     </View>
   );
 }
 
-const Stack = createStackNavigator();
-
-export default function App() {
+function TaskScreen() {
   const [task, setTask] = useState();
   const [taskItems, setTaskItems] = useState([]);
   const handleAddTask = () => {
@@ -77,7 +81,6 @@ export default function App() {
         return "th";
     }
   };
-
   return (
     <View style={styles.container}>
       <View style={styles.taskWrapper}>
@@ -117,14 +120,33 @@ export default function App() {
   );
 }
 
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Tasks" component={TaskScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
   },
 
+  homeButtonWrapper: {
+    backgroundColor: "#46BCFF",
+    color: "#fff",
+    textAlign: "center",
+  },
+
   taskWrapper: {
-    paddingTop: 80,
+    paddingTop: 20,
     paddingHorizontal: 20,
   },
   sectionTitle: {
