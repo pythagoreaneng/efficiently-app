@@ -27,7 +27,7 @@ export default function App() {
   };
 
   let d = new Date();
-  let months = [
+  const months = [
     "January",
     "February",
     "March",
@@ -40,6 +40,16 @@ export default function App() {
     "October",
     "November",
     "December",
+  ];
+
+  let dues = [
+    "3 days ago",
+    "2 days ago",
+    "Yesterday",
+    "Today",
+    "Tomorrow",
+    "In 2 days",
+    "In 3 days",
   ];
 
   const nth = (d) => {
