@@ -17,12 +17,17 @@ import { createStackNavigator } from "@react-navigation/stack";
 function HomeScreen({ navigation }) {
   return (
     <View>
-      <Text style={styles.homeButtonWrapper}>Efficiently App</Text>
-      <Button
-        style={styles.homeButtonWrapper}
-        title="Tasks"
-        onPress={() => navigation.navigate("Tasks")}
-      />
+      <View style={styles.homeSectionWrapper}>
+        <View style={styles.homeButtonWrapper}>
+          <Button title="Tasks" onPress={() => navigation.navigate("Tasks")} />
+        </View>
+        <View style={styles.homeButtonWrapper}>
+          <Button
+            title="Calendar"
+            onPress={() => navigation.navigate("Calendar")}
+          />
+        </View>
+      </View>
     </View>
   );
 }
@@ -120,6 +125,10 @@ function TaskScreen() {
   );
 }
 
+function CalendarScreen() {
+  return <View></View>;
+}
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -128,6 +137,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Tasks" component={TaskScreen} />
+        <Stack.Screen name="Calendar" component={CalendarScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -139,10 +149,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 
+  homeSectionWrapper: {
+    flexDirection: "row",
+    paddingTop: 40,
+    flexWrap: "wrap",
+    margin: 30,
+  },
   homeButtonWrapper: {
-    backgroundColor: "#46BCFF",
-    color: "#fff",
-    textAlign: "center",
+    borderRadius: 10,
+    width: 180,
+    height: 110,
+    backgroundColor: "#F6F6F6",
+    borderColor: "#C0C0C0",
+    borderWidth: 1,
+    paddingTop: 40,
+    backgroundColor: "#333",
+    color: "#333",
   },
 
   taskWrapper: {
