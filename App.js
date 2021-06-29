@@ -15,48 +15,41 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 
-function HomeScreen({ navigation }) {
+const HomeScreen = ({ navigation }) => {
   return (
     <View>
       <View>
         <Calendar />
       </View>
-      <View>
-        <View style={styles.homeSectionWrapper}>
-          <View style={styles.homeButtonWrapper}>
-            <Button
-              title="Inbox"
-              onPress={() => navigation.navigate("Tasks")}
-            />
-          </View>
-          <View style={styles.homeButtonWrapper}>
-            <Button
-              title="Today"
-              onPress={() => navigation.navigate("Tasks")}
-            />
-          </View>
-          <View style={styles.homeButtonWrapper}>
-            <Button title="Star" onPress={() => navigation.navigate("Tasks")} />
-          </View>
-          <View style={styles.homeButtonWrapper}>
-            <Button
-              title="Anytime"
-              onPress={() => navigation.navigate("Tasks")}
-            />
-          </View>
-          <View style={styles.homeButtonWrapper}>
-            <Button
-              title="Calendar"
-              onPress={() => navigation.navigate("Tasks")}
-            />
-          </View>
+
+      <View style={styles.homeSectionWrapper}>
+        <View style={styles.homeButtonWrapper}>
+          <Button title="Inbox" onPress={() => navigation.navigate("Tasks")} />
+        </View>
+        <View style={styles.homeButtonWrapper}>
+          <Button title="Today" onPress={() => navigation.navigate("Tasks")} />
+        </View>
+        <View style={styles.homeButtonWrapper}>
+          <Button title="Star" onPress={() => navigation.navigate("Tasks")} />
+        </View>
+        <View style={styles.homeButtonWrapper}>
+          <Button
+            title="Anytime"
+            onPress={() => navigation.navigate("Tasks")}
+          />
+        </View>
+        <View style={styles.homeButtonWrapper}>
+          <Button
+            title="Calendar"
+            onPress={() => navigation.navigate("Calendar")}
+          />
         </View>
       </View>
     </View>
   );
-}
+};
 
-function TaskScreen() {
+const TaskScreen = () => {
   const [task, setTask] = useState();
   const [taskItems, setTaskItems] = useState([]);
   const handleAddTask = () => {
@@ -147,7 +140,9 @@ function TaskScreen() {
       </KeyboardAvoidingView>
     </View>
   );
-}
+};
+
+const CalendarScreen = () => <CalendarList />;
 
 const Stack = createStackNavigator();
 
@@ -157,6 +152,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Tasks" component={TaskScreen} />
+        <Stack.Screen name="Calendar" component={CalendarScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
