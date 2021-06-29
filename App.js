@@ -44,6 +44,12 @@ function HomeScreen({ navigation }) {
               onPress={() => navigation.navigate("Tasks")}
             />
           </View>
+          <View style={styles.homeButtonWrapper}>
+            <Button
+              title="Calendar"
+              onPress={() => navigation.navigate("Tasks")}
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -143,15 +149,6 @@ function TaskScreen() {
   );
 }
 
-function CalendarScreen() {
-  return (
-    <View>
-      <Text>Calendar</Text>
-      <Calendar />
-    </View>
-  );
-}
-
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -160,7 +157,6 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Tasks" component={TaskScreen} />
-        <Stack.Screen name="Calendar" component={CalendarScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -178,13 +174,12 @@ const styles = StyleSheet.create({
     height: "100%",
     flexWrap: "wrap",
     marginTop: 30,
-    justifyContent: "space-evenly",
-    alignSelf: "center",
   },
   homeButtonWrapper: {
     borderRadius: 10,
     marginTop: 15,
     marginBottom: 15,
+    marginLeft: 45,
     width: 150,
     height: 110,
     backgroundColor: "#F6F6F6",
