@@ -44,6 +44,12 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("Calendar")}
           />
         </View>
+        <View style={styles.homeButtonWrapper}>
+          <Button
+            title="Agenda"
+            onPress={() => navigation.navigate("Agenda")}
+          />
+        </View>
       </View>
     </View>
   );
@@ -144,6 +150,8 @@ const TaskScreen = () => {
 
 const CalendarScreen = () => <CalendarList />;
 
+const AgendaScreen = () => <Agenda />;
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -153,6 +161,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Tasks" component={TaskScreen} />
         <Stack.Screen name="Calendar" component={CalendarScreen} />
+        <Stack.Screen name="Agenda" component={AgendaScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
