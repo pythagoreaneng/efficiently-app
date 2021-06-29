@@ -174,20 +174,31 @@ const styles = StyleSheet.create({
 
   homeSectionWrapper: {
     flexDirection: "row",
-    paddingTop: 20,
+    width: "100%",
+    height: "100%",
     flexWrap: "wrap",
-    margin: 30,
+    marginTop: 30,
+    justifyContent: "space-evenly",
+    alignSelf: "center",
   },
   homeButtonWrapper: {
     borderRadius: 10,
-    width: 180,
+    marginTop: 15,
+    marginBottom: 15,
+    width: 150,
     height: 110,
     backgroundColor: "#F6F6F6",
     borderColor: "#C0C0C0",
     borderWidth: 1,
-    paddingTop: 40,
-    backgroundColor: "#333",
-    color: "#333",
+    paddingTop: 70,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 6,
   },
 
   taskWrapper: {
