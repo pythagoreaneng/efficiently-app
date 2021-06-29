@@ -13,6 +13,7 @@ import {
 import Task from "./components/Task";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+//import UserCalendar from "./components/UserCalendar";
 
 function HomeScreen({ navigation }) {
   return (
@@ -126,7 +127,11 @@ function TaskScreen() {
 }
 
 function CalendarScreen() {
-  return <View></View>;
+  return (
+    <View>
+      <Text>Calendar</Text>
+    </View>
+  );
 }
 
 const Stack = createStackNavigator();
