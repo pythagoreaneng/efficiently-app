@@ -18,10 +18,6 @@ import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 const HomeScreen = ({ navigation }) => {
   return (
     <View>
-      <View>
-        <Calendar />
-      </View>
-
       <View style={styles.homeSectionWrapper}>
         <View style={styles.homeButtonWrapper}>
           <Button title="Inbox" onPress={() => navigation.navigate("Tasks")} />
@@ -156,14 +152,21 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Tasks" component={TaskScreen} />
-        <Stack.Screen name="Calendar" component={CalendarScreen} />
-        <Stack.Screen name="Agenda" component={AgendaScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.mainScreen}>
+      <View style={styles.mainTopScreen}>
+        <Calendar />
+      </View>
+      <View style={styles.mainBottomScreen}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Tasks" component={TaskScreen} />
+            <Stack.Screen name="Calendar" component={CalendarScreen} />
+            <Stack.Screen name="Agenda" component={AgendaScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </View>
+    </View>
   );
 }
 
@@ -171,6 +174,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+
+  mainScreen: {
+    flexDirection: "column",
+    height: "100%",
+  },
+
+  mainTopScreen: { paddingTop: "10%", height: "40%" },
+  mainBottomScreen: {
+    paddingTop: "0.3%",
+    height: "65%",
+    backgroundColor: "#46BCFF",
   },
 
   homeSectionWrapper: {
