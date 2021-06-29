@@ -51,6 +51,46 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
+let d = new Date();
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+let dues = [
+  "3 days ago",
+  "2 days ago",
+  "Yesterday",
+  "Today",
+  "Tomorrow",
+  "In 2 days",
+  "In 3 days",
+];
+
+const nth = (d) => {
+  if (d > 3 && d < 21) return "th";
+  switch (d % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+};
+
 const TaskScreen = () => {
   const [task, setTask] = useState();
   const [taskItems, setTaskItems] = useState([]);
@@ -66,31 +106,42 @@ const TaskScreen = () => {
     setTaskItems(itemsCopy);
   };
 
-  let d = new Date();
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  const GetToday = () => {
+    let d = new Date();
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
 
-  let dues = [
-    "3 days ago",
-    "2 days ago",
-    "Yesterday",
-    "Today",
-    "Tomorrow",
-    "In 2 days",
-    "In 3 days",
-  ];
+    let dues = [
+      "3 days ago",
+      "2 days ago",
+      "Yesterday",
+      "Today",
+      "Tomorrow",
+      "In 2 days",
+      "In 3 days",
+    ];
+
+    return (
+      <View>
+        <Text>
+          {months[d.getMonth()]} {d.getDate()}
+          {nth(d.getDate())}
+        </Text>
+      </View>
+    );
+  };
 
   const nth = (d) => {
     if (d > 3 && d < 21) return "th";
@@ -158,11 +209,27 @@ export default function App() {
       </View>
       <View style={styles.mainBottomScreen}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Tasks" component={TaskScreen} />
-            <Stack.Screen name="Calendar" component={CalendarScreen} />
-            <Stack.Screen name="Agenda" component={AgendaScreen} />
+          <Stack.Navigator initialRouteName=" ">
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              // options={{ headerTitle: <GetToday /> }}
+            />
+            <Stack.Screen
+              name="Tasks"
+              component={TaskScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="Calendar"
+              component={CalendarScreen}
+              options={{ title: "" }}
+            />
+            <Stack.Screen
+              name="Agenda"
+              component={AgendaScreen}
+              options={{ title: "" }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
@@ -181,11 +248,11 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 
-  mainTopScreen: { paddingTop: "10%", height: "40%" },
+  mainTopScreen: { paddingTop: "10%", height: "45%" },
   mainBottomScreen: {
     paddingTop: "0.3%",
     height: "65%",
-    backgroundColor: "#46BCFF",
+    backgroundColor: "#E2E2E2",
   },
 
   homeSectionWrapper: {
@@ -193,7 +260,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     flexWrap: "wrap",
-    marginTop: 30,
+    backgroundColor: "#fff",
   },
   homeButtonWrapper: {
     borderRadius: 10,
