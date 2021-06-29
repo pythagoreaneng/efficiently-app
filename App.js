@@ -13,20 +13,37 @@ import {
 import Task from "./components/Task";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-//import UserCalendar from "./components/UserCalendar";
+import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 
 function HomeScreen({ navigation }) {
   return (
     <View>
-      <View style={styles.homeSectionWrapper}>
-        <View style={styles.homeButtonWrapper}>
-          <Button title="Tasks" onPress={() => navigation.navigate("Tasks")} />
-        </View>
-        <View style={styles.homeButtonWrapper}>
-          <Button
-            title="Calendar"
-            onPress={() => navigation.navigate("Calendar")}
-          />
+      <View>
+        <Calendar />
+      </View>
+      <View>
+        <View style={styles.homeSectionWrapper}>
+          <View style={styles.homeButtonWrapper}>
+            <Button
+              title="Inbox"
+              onPress={() => navigation.navigate("Tasks")}
+            />
+          </View>
+          <View style={styles.homeButtonWrapper}>
+            <Button
+              title="Today"
+              onPress={() => navigation.navigate("Tasks")}
+            />
+          </View>
+          <View style={styles.homeButtonWrapper}>
+            <Button title="Star" onPress={() => navigation.navigate("Tasks")} />
+          </View>
+          <View style={styles.homeButtonWrapper}>
+            <Button
+              title="Anytime"
+              onPress={() => navigation.navigate("Tasks")}
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -130,6 +147,7 @@ function CalendarScreen() {
   return (
     <View>
       <Text>Calendar</Text>
+      <Calendar />
     </View>
   );
 }
@@ -156,7 +174,7 @@ const styles = StyleSheet.create({
 
   homeSectionWrapper: {
     flexDirection: "row",
-    paddingTop: 40,
+    paddingTop: 20,
     flexWrap: "wrap",
     margin: 30,
   },
