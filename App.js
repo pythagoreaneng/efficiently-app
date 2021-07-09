@@ -9,47 +9,15 @@ import {
   TouchableOpacity,
   Keyboard,
   Button,
+  ScrollView,
 } from "react-native";
 import Task from "./components/Task";
+import HomeScreen from "./components/HomeScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 
-const HomeScreen = ({ navigation }) => {
-  return (
-    <View>
-      <View style={styles.homeSectionWrapper}>
-        <View style={styles.homeButtonWrapper}>
-          <Button title="Inbox" onPress={() => navigation.navigate("Tasks")} />
-        </View>
-        <View style={styles.homeButtonWrapper}>
-          <Button title="Today" onPress={() => navigation.navigate("Tasks")} />
-        </View>
-        <View style={styles.homeButtonWrapper}>
-          <Button title="Star" onPress={() => navigation.navigate("Tasks")} />
-        </View>
-        <View style={styles.homeButtonWrapper}>
-          <Button
-            title="Anytime"
-            onPress={() => navigation.navigate("Tasks")}
-          />
-        </View>
-        <View style={styles.homeButtonWrapper}>
-          <Button
-            title="Calendar"
-            onPress={() => navigation.navigate("Calendar")}
-          />
-        </View>
-        <View style={styles.homeButtonWrapper}>
-          <Button
-            title="Agenda"
-            onPress={() => navigation.navigate("Agenda")}
-          />
-        </View>
-      </View>
-    </View>
-  );
-};
+
 
 const TaskScreen = () => {
   const [task, setTask] = useState();
@@ -154,7 +122,18 @@ export default function App() {
   return (
     <View style={styles.mainScreen}>
       <View style={styles.mainTopScreen}>
-        <Calendar />
+        <Calendar
+          markedDates={{
+            "2021-07-16": {
+              selected: true,
+              marked: true,
+              selectedColor: "blue",
+            },
+            "2021-07-17": { marked: true },
+            "2021-07-18": { marked: true, dotColor: "red", activeOpacity: 0 },
+            "2021-07-19": { disabled: true, disableTouchEvent: true },
+          }}
+        />
       </View>
       <View style={styles.mainBottomScreen}>
         <NavigationContainer>
