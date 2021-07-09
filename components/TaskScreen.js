@@ -1,5 +1,15 @@
-import React from 'react';
-import {StyleSheet, View, Text, Button, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet,
+    Text,
+    View,
+    KeyboardAvoidingView,
+    Platform,
+    TextInput,
+    TouchableOpacity,
+    Keyboard,
+    Button,
+    ScrollView, } from 'react-native';
+import Task from './Task';
 
 const TaskScreen = () => {
     const [task, setTask] = useState();
@@ -94,4 +104,53 @@ const TaskScreen = () => {
     );
   };
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+      },
+      sectionTitle: {
+        fontSize: 24,
+        fontWeight: "bold",
+        color: "#46BCFF",
+      },
+      items: {
+        marginTop: 30,
+      },
+      writeTaskWrapper: {
+        position: "absolute",
+        bottom: 60,
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "center",
+      },
+    input: {
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    backgroundColor: "#FFF",
+    borderRadius: 60,
+    borderColor: "#C0C0C0",
+    width: 250,
+    borderWidth: 1,
+  },
+  taskWrapper: {
+    paddingTop: 20,
+    paddingHorizontal: 20,
+  },
+  addWrapper: {
+    width: 60,
+    height: 60,
+    backgroundColor: "#232323",
+    borderRadius: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#C0C0C0",
+    borderWidth: 1,
+  },
+  addText: {
+    fontSize: 40,
+    color: "#fff",
+  },
+})
   export default TaskScreen;

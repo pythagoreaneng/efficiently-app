@@ -1,5 +1,14 @@
 import React from 'react';
-import {StyleSheet, View, Text, Button, ScrollView } from 'react-native';
+import {StyleSheet,
+    Text,
+    View,
+    KeyboardAvoidingView,
+    Platform,
+    TextInput,
+    TouchableOpacity,
+    Keyboard,
+    Button,
+    ScrollView,} from 'react-native';
 
 const HomeScreen = ({ navigation }) => {
     return (
