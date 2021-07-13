@@ -10,36 +10,47 @@ import {
   Keyboard,
   Button,
   ScrollView,
+  Image,
 } from "react-native";
+import { ReactComponent as inboxImg } from "../assets/efficiently-logo.svg";
 
 const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.panelWrapper}>
       <View style={styles.homeColWrapper}>
         <View style={styles.homeRowWrapper}>
-          <View style={styles.homeButtonWrapper}>
-            <Button
-              title="Inbox"
-              onPress={() => navigation.navigate("Tasks")}
-            />
-          </View>
-          <View style={styles.homeButtonWrapper}>
+          <TouchableOpacity
+            style={styles.homeButtonWrapper}
+            onPress={() => navigation.navigate("Tasks")}
+          >
+            <Button title="Inbox"></Button>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeButtonWrapper}
+            onPress={() => navigation.navigate("Tasks")}
+          >
             <Button
               title="Today"
               onPress={() => navigation.navigate("Tasks")}
             />
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.homeRowWrapper}>
-          <View style={styles.homeButtonWrapper}>
+          <TouchableOpacity
+            style={styles.homeButtonWrapper}
+            onPress={() => navigation.navigate("Tasks")}
+          >
             <Button title="Star" onPress={() => navigation.navigate("Tasks")} />
-          </View>
-          <View style={styles.homeButtonWrapper}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeButtonWrapper}
+            onPress={() => navigation.navigate("Tasks")}
+          >
             <Button
               title="Anytime"
               onPress={() => navigation.navigate("Tasks")}
             />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -47,6 +58,11 @@ const HomeScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  icon: {
+    height: "100%",
+    width: "100%",
+    backgroundColor: "#f1f1f1",
+  },
   panelWrapper: {
     width: "100%",
     height: "100%",
@@ -92,7 +108,7 @@ const styles = StyleSheet.create({
   },
   writeTaskWrapper: {
     position: "absolute",
-    bottom: 60,
+    bottom: 400,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-around",
