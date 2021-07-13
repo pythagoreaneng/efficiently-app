@@ -34,10 +34,47 @@ export default function App() {
   const animatedValue = new Animated.Value(10);
   const { height } = Dimensions.get("window");
   const scheme = useColorScheme();
+  const INITIAL_DATE = "2021-07-01";
+  const [selected, setSelected] = useState(INITIAL_DATE);
+  const [showMarkedDatesExamples, setShowMarkedDatesExamples] = useState(false);
+
+  const toggleSwitch = () => {
+    setShowMarkedDatesExamples(!showMarkedDatesExamples);
+  };
+
+  const onDayPress = (day) => {
+    setSelected(day.dateString);
+  };
+
+  const getDisabledDates = (startDate, endDate, daysToDisable) => {
+    const disabledDates = {};
+    const start = XDate(startDate);
+    const end = XDate(endDate);
+
+    for (let m = XDate(start); m.diffDays(end) <= 0; m.addDays(1)) {
+      if (_.includes(daysToDisable, m.weekday())) {
+        disabledDates[m.toString("YYYY-MM-DD")] = { disabled: true };
+      }
+    }
+    return disabledDates;
+  };
   return (
     <View style={styles.mainScreen}>
       <View style={styles.mainTopScreen}>
-        <Calendar />
+        <Calendar
+          // testID={testIDs.calendars.FIRST}
+          current={INITIAL_DATE}
+          style={styles.calendar}
+          onDayPress={onDayPress}
+          markedDates={{
+            [selected]: {
+              selected: true,
+              disableTouchEvent: true,
+              selectedColor: "#46BCFF",
+              selectedTextColor: "#FFFFFF",
+            },
+          }}
+        />
       </View>
       <SlidingUpPanel
         animatedValue={animatedValue}
@@ -47,7 +84,6 @@ export default function App() {
         friction={0.5}
         style={styles.panel}
       >
-        <View style={styles.test} />
         <NavigationContainer
           theme={scheme === "dark" ? DarkTheme : DefaultTheme}
         >
