@@ -39,10 +39,15 @@ export default function App() {
         snappingPoints={[360]}
         height={height + 180}
         friction={0.5}
+        style={styles.panel}
       >
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={HomeScreen} />
+        <NavigationContainer style={styles.panel}>
+          <Stack.Navigator initialRouteName="Home" style={styles.panel}>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              style={styles.panel}
+            />
             <Stack.Screen name="Tasks" component={TaskScreen} />
             <Stack.Screen name="Calendar" component={CalendarScreen} />
             <Stack.Screen name="Agenda" component={AgendaScreen} />
@@ -63,6 +68,10 @@ const styles = StyleSheet.create({
   mainBottomScreen: {
     paddingTop: "0.3%",
     height: "65%",
-    backgroundColor: "#46BCFF",
+    backgroundColor: "#975",
+  },
+  panel: {
+    backgroundColor: "#719",
+    height: "100%",
   },
 });
