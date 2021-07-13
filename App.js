@@ -10,38 +10,36 @@ import {
   Keyboard,
   Button,
   ScrollView,
+  Animated,
+  Dimensions,
 } from "react-native";
 import Task from "./components/Task";
-import TaskScreen from './components/TaskScreen'
+import TaskScreen from "./components/TaskScreen";
 import HomeScreen from "./components/HomeScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 
 const CalendarScreen = () => <CalendarList />;
-
 const AgendaScreen = () => <Agenda />;
-
 const Stack = createStackNavigator();
+import SlidingUpPanel from "rn-sliding-up-panel";
 
 export default function App() {
+  const animatedValue = new Animated.Value(10);
+  const { height } = Dimensions.get("window");
   return (
     <View style={styles.mainScreen}>
       <View style={styles.mainTopScreen}>
-        <Calendar
-          markedDates={{
-            "2021-07-16": {
-              selected: true,
-              marked: true,
-              selectedColor: "blue",
-            },
-            "2021-07-17": { marked: true },
-            "2021-07-18": { marked: true, dotColor: "red", activeOpacity: 0 },
-            "2021-07-19": { disabled: true, disableTouchEvent: true },
-          }}
-        />
+        <Calendar />
       </View>
-      <View style={styles.mainBottomScreen}>
+      <SlidingUpPanel
+        animatedValue={animatedValue}
+        draggableRange={{ top: height - 100, bottom: height - 400 }}
+        snappingPoints={[360]}
+        height={height + 180}
+        friction={0.5}
+      >
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={HomeScreen} />
@@ -50,17 +48,12 @@ export default function App() {
             <Stack.Screen name="Agenda" component={AgendaScreen} />
           </Stack.Navigator>
         </NavigationContainer>
-      </View>
+      </SlidingUpPanel>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-
   mainScreen: {
     flexDirection: "column",
     height: "100%",
@@ -72,7 +65,4 @@ const styles = StyleSheet.create({
     height: "65%",
     backgroundColor: "#46BCFF",
   },
-
-  
-  
 });
