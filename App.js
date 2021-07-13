@@ -16,9 +16,14 @@ import {
 import Task from "./components/Task";
 import TaskScreen from "./components/TaskScreen";
 import HomeScreen from "./components/HomeScreen";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
+import { useColorScheme } from "react-native";
 
 const CalendarScreen = () => <CalendarList />;
 const AgendaScreen = () => <Agenda />;
@@ -28,6 +33,7 @@ import SlidingUpPanel from "rn-sliding-up-panel";
 export default function App() {
   const animatedValue = new Animated.Value(10);
   const { height } = Dimensions.get("window");
+  const scheme = useColorScheme();
   return (
     <View style={styles.mainScreen}>
       <View style={styles.mainTopScreen}>
@@ -41,8 +47,16 @@ export default function App() {
         friction={0.5}
         style={styles.panel}
       >
-        <NavigationContainer style={styles.panel}>
-          <Stack.Navigator initialRouteName="Home" style={styles.panel}>
+        <View style={styles.test} />
+        <NavigationContainer
+          theme={scheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerShown: "none",
+            }}
+          >
             <Stack.Screen
               name="Home"
               component={HomeScreen}
@@ -59,6 +73,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  test: { height: 1, backgroundColor: "#f0f0f0" },
   mainScreen: {
     flexDirection: "column",
     height: "100%",
