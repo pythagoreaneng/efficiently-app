@@ -12,6 +12,8 @@ import {
   ScrollView,
 } from "react-native";
 import Task from "./Task";
+import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const TaskScreen = () => {
   const [task, setTask] = useState();
@@ -67,6 +69,7 @@ const TaskScreen = () => {
         return "th";
     }
   };
+
   return (
     <>
       <View style={styles.container}>
@@ -101,9 +104,7 @@ const TaskScreen = () => {
             onChangeText={(text) => setTask(text)}
           />
           <TouchableOpacity onPress={() => handleAddTask()}>
-            <View style={styles.addWrapper}>
-              <Text style={styles.addText}>+</Text>
-            </View>
+            <AntDesign name="pluscircle" size={48} color="black" />
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </View>

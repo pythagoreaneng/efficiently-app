@@ -12,7 +12,6 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import { ReactComponent as inboxImg } from "../assets/efficiently-logo.svg";
 
 const HomeScreen = ({ navigation }) => {
   return (
@@ -23,7 +22,14 @@ const HomeScreen = ({ navigation }) => {
             style={styles.homeButtonWrapper}
             onPress={() => navigation.navigate("Tasks")}
           >
-            <Button title="Inbox"></Button>
+            <Image
+            // style={{ height: 100, width: 100 }}
+            // source={require("../assets/inbox.png")}
+            />
+            <Button
+              title="Inbox"
+              onPress={() => navigation.navigate("Tasks")}
+            ></Button>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.homeButtonWrapper}
