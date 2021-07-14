@@ -100,9 +100,9 @@ export default function App() {
             // Inter_800ExtraBold,
             // Inter_900Black,
             //calendarBackground: "#911",
-            textDayFontFamily: "Inter_900Black",
+            //textDayFontFamily: "Inter_900Black",
             textMonthFontFamily: "Inter_900Black",
-            textDayHeaderFontFamily: "Inter_900Black",
+            //textDayHeaderFontFamily: "Inter_900Black",
             textDayFontSize: 15,
             textMonthFontSize: 20,
             textDayHeaderFontSize: 10,
@@ -126,7 +126,7 @@ export default function App() {
             screenOptions={{
               // headerShown: null,
               headerStyle: {
-                backgroundColor: "#fefefe",
+                backgroundColor: "#fafafa",
                 // header bottom bar
                 elevation: 0, //ios
                 shadowOpacity: 0, //android
@@ -161,7 +161,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  line: { height: 1, backgroundColor: "#fff" },
+  line: { height: 1, backgroundColor: "#911" },
   mainScreen: {
     flexDirection: "column",
     height: "100%",
