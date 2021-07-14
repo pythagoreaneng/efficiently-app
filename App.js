@@ -27,6 +27,10 @@ import { useColorScheme } from "react-native";
 const Stack = createStackNavigator();
 import SlidingUpPanel from "rn-sliding-up-panel";
 import XDate from "xdate";
+import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
+import { EvilIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function App() {
   const animatedValue = new Animated.Value(10);
@@ -36,6 +40,9 @@ export default function App() {
   const todayDate = XDate.locales[XDate.defaultLocale].today;
   const [selected, setSelected] = useState(todayDate);
   const [showMarkedDatesExamples, setShowMarkedDatesExamples] = useState(false);
+  let [fontsLoaded] = useFonts({
+    Inter_900Black,
+  });
 
   const toggleSwitch = () => {
     setShowMarkedDatesExamples(!showMarkedDatesExamples);
@@ -58,6 +65,15 @@ export default function App() {
     return disabledDates;
   };
 
+  const TopIcon = (onPress) => {
+    return (
+      <MaterialCommunityIcons name="drag-horizontal" size={24} color="black" />
+    );
+  };
+  const DownLogo = (onPress) => {
+    return <EvilIcons name="chevron-down" size={24} color="black" />;
+  };
+
   return (
     <View style={styles.mainScreen}>
       <View style={styles.mainTopScreen}>
@@ -74,11 +90,19 @@ export default function App() {
           }}
           theme={{
             //todayTextColor: "#46BCFF",
-
+            // Inter_100Thin,
+            // Inter_200ExtraLight,
+            // Inter_300Light,
+            // Inter_400Regular,
+            // Inter_500Medium,
+            // Inter_600SemiBold,
+            // Inter_700Bold,
+            // Inter_800ExtraBold,
+            // Inter_900Black,
             //calendarBackground: "#911",
-            // textDayFontFamily: "Inter-VariableFont_slnt,wght",
-            // textMonthFontFamily: "monospace",
-            // textDayHeaderFontFamily: "monospace",
+            //textDayFontFamily: "Inter_900Black",
+            textMonthFontFamily: "Inter_900Black",
+            //textDayHeaderFontFamily: "Inter_900Black",
             textDayFontSize: 15,
             textMonthFontSize: 20,
             textDayHeaderFontSize: 10,
@@ -100,18 +124,35 @@ export default function App() {
           <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
-              headerShown: "none",
+              // headerShown: null,
               headerStyle: {
-                backgroundColor: "#fAfAfA",
+                backgroundColor: "#fafafa",
+                // header bottom bar
+                elevation: 0, //ios
+                shadowOpacity: 0, //android
               },
+              //headerLeft: null,
+              headerBackTitleVisible: false,
+              shadowColor: "transparent",
             }}
           >
             <Stack.Screen
               name="Home"
               component={HomeScreen}
               style={styles.panel}
+              options={{
+                headerTitle: () => <TopIcon />,
+                headerBackTitle: null,
+              }}
             />
-            <Stack.Screen name="Tasks" component={TaskScreen} />
+            <Stack.Screen
+              name="Tasks"
+              component={TaskScreen}
+              options={{
+                headerTitle: () => <TopIcon />,
+                headerBackTitle: null,
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </SlidingUpPanel>
@@ -120,7 +161,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  line: { height: 1, backgroundColor: "#f0f0f0" },
+  line: { height: 1, backgroundColor: "#911" },
   mainScreen: {
     flexDirection: "column",
     height: "100%",

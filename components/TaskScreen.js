@@ -115,7 +115,7 @@ const TaskScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#fafafa",
   },
   sectionTitle: {
     fontSize: 24,

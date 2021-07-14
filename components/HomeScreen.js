@@ -28,12 +28,14 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("Tasks")}
           >
             <Octicons name="inbox" size={42} color="#46BCFF" />
+            <Text style={styles.buttonCount}>0</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.homeButtonWrapper}
             onPress={() => navigation.navigate("Tasks")}
           >
             <Octicons name="note" size={42} color="#FFE600" />
+            <Text style={styles.buttonCount}>0</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.homeRowWrapper}>
@@ -42,12 +44,14 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("Tasks")}
           >
             <Feather name="repeat" size={42} color="#5EB672" />
+            <Text style={styles.buttonCount}>0</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.homeButtonWrapper}
             onPress={() => navigation.navigate("Tasks")}
           >
             <FontAwesome name="search" size={42} color="#B4B1B1" />
+            <Text style={styles.buttonCount}>0</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -61,10 +65,15 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#f1f1f1",
   },
+  buttonCount: {
+    paddingTop: 5,
+    color: "#46BCFF",
+  },
+  //this is the main panel
   panelWrapper: {
     width: "100%",
     height: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: "#fafafa",
   },
   homeColWrapper: {
     flexDirection: "column",
@@ -75,15 +84,16 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   homeButtonWrapper: {
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
     borderRadius: 10,
     width: 150,
     height: 110,
     backgroundColor: "#fff",
     borderColor: "#C0C0C0",
     borderWidth: 1,
-    paddingTop: 30,
+    paddingTop: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
