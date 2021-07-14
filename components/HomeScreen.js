@@ -33,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
             style={styles.homeButtonWrapper}
             onPress={() => navigation.navigate("Tasks")}
           >
-            <MaterialIcons name="notes" size={42} color="#FFE600" />
+            <Octicons name="note" size={42} color="#FFE600" />
           </TouchableOpacity>
         </View>
         <View style={styles.homeRowWrapper}>
