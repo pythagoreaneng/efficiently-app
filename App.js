@@ -29,6 +29,8 @@ import SlidingUpPanel from "rn-sliding-up-panel";
 import XDate from "xdate";
 import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
 import { EvilIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function App() {
   const animatedValue = new Animated.Value(10);
@@ -63,8 +65,13 @@ export default function App() {
     return disabledDates;
   };
 
-  const UpLogo = (onPress) => {
-    return <EvilIcons name="chevron-up" size={24} color="black" />;
+  const TopIcon = (onPress) => {
+    return (
+      <MaterialCommunityIcons name="drag-horizontal" size={24} color="black" />
+    );
+  };
+  const DownLogo = (onPress) => {
+    return <EvilIcons name="chevron-down" size={24} color="black" />;
   };
 
   return (
@@ -134,14 +141,17 @@ export default function App() {
               component={HomeScreen}
               style={styles.panel}
               options={{
-                headerTitle: () => <UpLogo />,
+                headerTitle: () => <TopIcon />,
                 headerBackTitle: null,
               }}
             />
             <Stack.Screen
               name="Tasks"
               component={TaskScreen}
-              options={{ headerTitle: () => <UpLogo />, headerBackTitle: null }}
+              options={{
+                headerTitle: () => <TopIcon />,
+                headerBackTitle: null,
+              }}
             />
           </Stack.Navigator>
         </NavigationContainer>
