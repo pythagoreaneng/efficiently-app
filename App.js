@@ -28,6 +28,7 @@ const Stack = createStackNavigator();
 import SlidingUpPanel from "rn-sliding-up-panel";
 import XDate from "xdate";
 import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
+import { EvilIcons } from "@expo/vector-icons";
 
 export default function App() {
   const animatedValue = new Animated.Value(10);
@@ -60,6 +61,10 @@ export default function App() {
       }
     }
     return disabledDates;
+  };
+
+  const UpLogo = (onPress) => {
+    return <EvilIcons name="chevron-up" size={24} color="black" />;
   };
 
   return (
@@ -114,7 +119,7 @@ export default function App() {
             screenOptions={{
               // headerShown: null,
               headerStyle: {
-                backgroundColor: "#fafafa",
+                backgroundColor: "#fefefe",
                 // header bottom bar
                 elevation: 0, //ios
                 shadowOpacity: 0, //android
@@ -128,12 +133,15 @@ export default function App() {
               name="Home"
               component={HomeScreen}
               style={styles.panel}
-              options={{ title: "", headerBackTitle: null }}
+              options={{
+                headerTitle: () => <UpLogo />,
+                headerBackTitle: null,
+              }}
             />
             <Stack.Screen
               name="Tasks"
               component={TaskScreen}
-              options={{ title: "", headerBackTitle: null }}
+              options={{ headerTitle: () => <UpLogo />, headerBackTitle: null }}
             />
           </Stack.Navigator>
         </NavigationContainer>
