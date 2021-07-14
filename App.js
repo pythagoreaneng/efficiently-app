@@ -114,10 +114,14 @@ export default function App() {
             screenOptions={{
               // headerShown: null,
               headerStyle: {
-                backgroundColor: "#fff",
+                backgroundColor: "#fafafa",
+                // header bottom bar
+                elevation: 0, //ios
+                shadowOpacity: 0, //android
               },
               //headerLeft: null,
               headerBackTitleVisible: false,
+              shadowColor: "transparent",
             }}
           >
             <Stack.Screen
@@ -139,7 +143,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  line: { height: 1, backgroundColor: "#f0f0f0" },
+  line: { height: 1, backgroundColor: "#fff" },
   mainScreen: {
     flexDirection: "column",
     height: "100%",

@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   panelWrapper: {
     width: "100%",
     height: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: "#fafafa",
   },
   homeColWrapper: {
     flexDirection: "column",
