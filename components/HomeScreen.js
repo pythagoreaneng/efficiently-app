@@ -13,6 +13,11 @@ import {
   Image,
 } from "react-native";
 
+import { Octicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+
 const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.panelWrapper}>
@@ -22,23 +27,13 @@ const HomeScreen = ({ navigation }) => {
             style={styles.homeButtonWrapper}
             onPress={() => navigation.navigate("Tasks")}
           >
-            <Image
-            // style={{ height: 100, width: 100 }}
-            // source={require("../assets/inbox.png")}
-            />
-            <Button
-              title="Inbox"
-              onPress={() => navigation.navigate("Tasks")}
-            ></Button>
+            <Octicons name="inbox" size={42} color="#46BCFF" />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.homeButtonWrapper}
             onPress={() => navigation.navigate("Tasks")}
           >
-            <Button
-              title="Today"
-              onPress={() => navigation.navigate("Tasks")}
-            />
+            <MaterialIcons name="notes" size={42} color="#FFE600" />
           </TouchableOpacity>
         </View>
         <View style={styles.homeRowWrapper}>
@@ -46,16 +41,13 @@ const HomeScreen = ({ navigation }) => {
             style={styles.homeButtonWrapper}
             onPress={() => navigation.navigate("Tasks")}
           >
-            <Button title="Star" onPress={() => navigation.navigate("Tasks")} />
+            <Feather name="repeat" size={42} color="#5EB672" />
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.homeButtonWrapper}
             onPress={() => navigation.navigate("Tasks")}
           >
-            <Button
-              title="Anytime"
-              onPress={() => navigation.navigate("Tasks")}
-            />
+            <FontAwesome name="search" size={42} color="#B4B1B1" />
           </TouchableOpacity>
         </View>
       </View>
@@ -83,13 +75,15 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   homeButtonWrapper: {
+    flexDirection: "row",
+    justifyContent: "center",
     borderRadius: 10,
     width: 150,
     height: 110,
     backgroundColor: "#fff",
     borderColor: "#C0C0C0",
     borderWidth: 1,
-    paddingTop: 70,
+    paddingTop: 30,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
