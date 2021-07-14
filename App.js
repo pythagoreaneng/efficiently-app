@@ -27,6 +27,7 @@ import { useColorScheme } from "react-native";
 const Stack = createStackNavigator();
 import SlidingUpPanel from "rn-sliding-up-panel";
 import XDate from "xdate";
+import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
 
 export default function App() {
   const animatedValue = new Animated.Value(10);
@@ -36,6 +37,9 @@ export default function App() {
   const todayDate = XDate.locales[XDate.defaultLocale].today;
   const [selected, setSelected] = useState(todayDate);
   const [showMarkedDatesExamples, setShowMarkedDatesExamples] = useState(false);
+  let [fontsLoaded] = useFonts({
+    Inter_900Black,
+  });
 
   const toggleSwitch = () => {
     setShowMarkedDatesExamples(!showMarkedDatesExamples);
@@ -76,7 +80,7 @@ export default function App() {
             //todayTextColor: "#46BCFF",
 
             //calendarBackground: "#911",
-            // textDayFontFamily: "Inter-VariableFont_slnt,wght",
+            // textDayFontFamily: "",
             // textMonthFontFamily: "monospace",
             // textDayHeaderFontFamily: "monospace",
             textDayFontSize: 15,
