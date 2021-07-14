@@ -78,11 +78,19 @@ export default function App() {
           }}
           theme={{
             //todayTextColor: "#46BCFF",
-
+            // Inter_100Thin,
+            // Inter_200ExtraLight,
+            // Inter_300Light,
+            // Inter_400Regular,
+            // Inter_500Medium,
+            // Inter_600SemiBold,
+            // Inter_700Bold,
+            // Inter_800ExtraBold,
+            // Inter_900Black,
             //calendarBackground: "#911",
-            // textDayFontFamily: "",
-            // textMonthFontFamily: "monospace",
-            // textDayHeaderFontFamily: "monospace",
+            textDayFontFamily: "Inter_900Black",
+            textMonthFontFamily: "Inter_900Black",
+            textDayHeaderFontFamily: "Inter_900Black",
             textDayFontSize: 15,
             textMonthFontSize: 20,
             textDayHeaderFontSize: 10,
