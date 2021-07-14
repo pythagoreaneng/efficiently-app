@@ -112,18 +112,25 @@ export default function App() {
           <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
-              headerShown: "none",
+              // headerShown: null,
               headerStyle: {
-                backgroundColor: "#fAfAfA",
+                backgroundColor: "#fff",
               },
+              //headerLeft: null,
+              headerBackTitleVisible: false,
             }}
           >
             <Stack.Screen
               name="Home"
               component={HomeScreen}
               style={styles.panel}
+              options={{ title: "", headerBackTitle: null }}
             />
-            <Stack.Screen name="Tasks" component={TaskScreen} />
+            <Stack.Screen
+              name="Tasks"
+              component={TaskScreen}
+              options={{ title: "", headerBackTitle: null }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </SlidingUpPanel>
