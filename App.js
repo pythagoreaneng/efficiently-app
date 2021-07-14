@@ -24,18 +24,17 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import { useColorScheme } from "react-native";
-
-const CalendarScreen = () => <CalendarList />;
-const AgendaScreen = () => <Agenda />;
 const Stack = createStackNavigator();
 import SlidingUpPanel from "rn-sliding-up-panel";
+import XDate from "xdate";
 
 export default function App() {
   const animatedValue = new Animated.Value(10);
   const { height } = Dimensions.get("window");
   const scheme = useColorScheme();
   const INITIAL_DATE = "2021-07-01";
-  const [selected, setSelected] = useState(INITIAL_DATE);
+  const todayDate = XDate.locales[XDate.defaultLocale].today;
+  const [selected, setSelected] = useState(todayDate);
   const [showMarkedDatesExamples, setShowMarkedDatesExamples] = useState(false);
 
   const toggleSwitch = () => {
@@ -58,13 +57,12 @@ export default function App() {
     }
     return disabledDates;
   };
+
   return (
     <View style={styles.mainScreen}>
       <View style={styles.mainTopScreen}>
         <Calendar
-          // testID={testIDs.calendars.FIRST}
-          current={INITIAL_DATE}
-          style={styles.calendar}
+          current={todayDate}
           onDayPress={onDayPress}
           markedDates={{
             [selected]: {
@@ -74,8 +72,20 @@ export default function App() {
               selectedTextColor: "#FFFFFF",
             },
           }}
+          theme={{
+            //todayTextColor: "#46BCFF",
+
+            //calendarBackground: "#911",
+            // textDayFontFamily: "Inter-VariableFont_slnt,wght",
+            // textMonthFontFamily: "monospace",
+            // textDayHeaderFontFamily: "monospace",
+            textDayFontSize: 15,
+            textMonthFontSize: 20,
+            textDayHeaderFontSize: 10,
+          }}
         />
       </View>
+
       <SlidingUpPanel
         animatedValue={animatedValue}
         draggableRange={{ top: height - 100, bottom: height - 400 }}
@@ -91,6 +101,9 @@ export default function App() {
             initialRouteName="Home"
             screenOptions={{
               headerShown: "none",
+              headerStyle: {
+                backgroundColor: "#fAfAfA",
+              },
             }}
           >
             <Stack.Screen
@@ -99,8 +112,6 @@ export default function App() {
               style={styles.panel}
             />
             <Stack.Screen name="Tasks" component={TaskScreen} />
-            <Stack.Screen name="Calendar" component={CalendarScreen} />
-            <Stack.Screen name="Agenda" component={AgendaScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </SlidingUpPanel>
@@ -109,7 +120,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  test: { height: 1, backgroundColor: "#f0f0f0" },
+  line: { height: 1, backgroundColor: "#f0f0f0" },
   mainScreen: {
     flexDirection: "column",
     height: "100%",
