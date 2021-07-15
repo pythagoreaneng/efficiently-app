@@ -1,57 +1,51 @@
 import React, { useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
-  KeyboardAvoidingView,
-  Platform,
-  TextInput,
-  TouchableOpacity,
-  Keyboard,
-  Button,
-  ScrollView,
   Animated,
   Dimensions,
+  useColorScheme,
 } from "react-native";
-import Task from "./components/Task";
-import TaskScreen from "./components/TaskScreen";
+
+// screens
 import HomeScreen from "./components/HomeScreen";
+import TaskScreen from "./components/TaskScreen";
+
+// react navigation
 import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-import { useColorScheme } from "react-native";
-const Stack = createStackNavigator();
-import SlidingUpPanel from "rn-sliding-up-panel";
+
+// react-native-calendars
+import { Calendar } from "react-native-calendars";
 import XDate from "xdate";
-import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
-import { EvilIcons } from "@expo/vector-icons";
+
+// sliding-up-panel
+import SlidingUpPanel from "rn-sliding-up-panel";
+
+// icons
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
+
+// declare Stack globally
+const Stack = createStackNavigator();
 
 export default function App() {
+  // sliding-up-panel related
   const animatedValue = new Animated.Value(10);
   const { height } = Dimensions.get("window");
-  const scheme = useColorScheme();
-  const INITIAL_DATE = "2021-07-01";
-  const todayDate = XDate.locales[XDate.defaultLocale].today;
-  const [selected, setSelected] = useState(todayDate);
-  const [showMarkedDatesExamples, setShowMarkedDatesExamples] = useState(false);
-  let [fontsLoaded] = useFonts({
-    Inter_900Black,
-  });
 
+  // react-native-calendars related, some are not in use yet
+  const [selected, setSelected] = useState("2021-07-01");
+  const [showMarkedDatesExamples, setShowMarkedDatesExamples] = useState(false);
   const toggleSwitch = () => {
     setShowMarkedDatesExamples(!showMarkedDatesExamples);
   };
-
   const onDayPress = (day) => {
     setSelected(day.dateString);
   };
-
   const getDisabledDates = (startDate, endDate, daysToDisable) => {
     const disabledDates = {};
     const start = XDate(startDate);
@@ -65,20 +59,25 @@ export default function App() {
     return disabledDates;
   };
 
-  const TopIcon = (onPress) => {
+  // Dark mode(Not implemented yet)
+  const scheme = useColorScheme();
+
+  //
+  const DraggableIcon = (onPress) => {
     return (
       <MaterialCommunityIcons name="drag-horizontal" size={24} color="black" />
     );
   };
-  const DownLogo = (onPress) => {
-    return <EvilIcons name="chevron-down" size={24} color="black" />;
-  };
 
   return (
     <View style={styles.mainScreen}>
-      <View style={styles.mainTopScreen}>
+      {/* Top screen
+
+      // Only displayes Calendar (react-native-calendars)
+      
+      */}
+      <View style={styles.mainScreenCalendar}>
         <Calendar
-          current={todayDate}
           onDayPress={onDayPress}
           markedDates={{
             [selected]: {
@@ -89,6 +88,8 @@ export default function App() {
             },
           }}
           theme={{
+            /* Fonts are not implemented yet */
+
             //todayTextColor: "#46BCFF",
             // Inter_100Thin,
             // Inter_200ExtraLight,
@@ -101,8 +102,9 @@ export default function App() {
             // Inter_900Black,
             //calendarBackground: "#911",
             //textDayFontFamily: "Inter_900Black",
-            textMonthFontFamily: "Inter_900Black",
+            //textMonthFontFamily: "Inter_900Black",
             //textDayHeaderFontFamily: "Inter_900Black",
+
             textDayFontSize: 15,
             textMonthFontSize: 20,
             textDayHeaderFontSize: 10,
@@ -110,30 +112,35 @@ export default function App() {
         />
       </View>
 
+      {/* Bottom screen (aka Panel)
+      Displayes Home menu (includes Todo, Notes, Routine cards)
+      Anything inside <SlidingUpPanel> is 'slidable'
+      */}
       <SlidingUpPanel
         animatedValue={animatedValue}
         draggableRange={{ top: height - 100, bottom: height - 400 }}
         snappingPoints={[360]}
         height={height + 180}
         friction={0.5}
-        style={styles.panel}
+        style={styles.mainScreenPanel}
       >
+        {/*Main contents here. Renders Home, Tasks, Notes, Routine etc */}
         <NavigationContainer
+          // darkmode under construction
           theme={scheme === "dark" ? DarkTheme : DefaultTheme}
         >
           <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
-              // headerShown: null,
               headerStyle: {
                 backgroundColor: "#fafafa",
-                // header bottom bar
+                // Removes
                 elevation: 0, //ios
                 shadowOpacity: 0, //android
               },
-              //headerLeft: null,
+              // removes header back title (says 'Back' otherwise)
               headerBackTitleVisible: false,
-              shadowColor: "transparent",
+              // shadowColor: "transparent",
             }}
           >
             <Stack.Screen
@@ -141,16 +148,14 @@ export default function App() {
               component={HomeScreen}
               style={styles.panel}
               options={{
-                headerTitle: () => <TopIcon />,
-                headerBackTitle: null,
+                headerTitle: () => <DraggableIcon />,
               }}
             />
             <Stack.Screen
               name="Tasks"
               component={TaskScreen}
               options={{
-                headerTitle: () => <TopIcon />,
-                headerBackTitle: null,
+                headerTitle: () => <DraggableIcon />,
               }}
             />
           </Stack.Navigator>
@@ -161,19 +166,12 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  line: { height: 1, backgroundColor: "#911" },
   mainScreen: {
     flexDirection: "column",
     height: "100%",
   },
-
-  mainTopScreen: { paddingTop: "10%", height: "40%" },
-  mainBottomScreen: {
-    paddingTop: "0.3%",
-    height: "65%",
-    backgroundColor: "#975",
-  },
-  panel: {
+  mainScreenCalendar: { paddingTop: "10%", height: "40%" },
+  mainScreenPanel: {
     backgroundColor: "#719",
     height: "100%",
   },
