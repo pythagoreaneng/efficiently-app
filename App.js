@@ -148,14 +148,14 @@ export default function App() {
               component={HomeScreen}
               style={styles.panel}
               options={{
-                headerTitle: () => <DraggableIcon />,
+                headerTitle: () => <DraggableIcon style={styles.headerTitle} />,
               }}
             />
             <Stack.Screen
               name="Tasks"
               component={TaskScreen}
               options={{
-                headerTitle: () => <DraggableIcon />,
+                headerTitle: () => <DraggableIcon style={styles.headerTitle} />,
               }}
             />
           </Stack.Navigator>
@@ -174,5 +174,11 @@ const styles = StyleSheet.create({
   mainScreenPanel: {
     backgroundColor: "#719",
     height: "100%",
+  },
+
+  // center draggable icon
+  headerTitle: {
+    flexDirection: "row",
+    justifyContent: "center",
   },
 });
