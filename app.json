@@ -24,11 +24,11 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "build": {
-      "babel": {
-        "include": ["rn-sliding-up-panel", "static-container"]
+      "favicon": "./assets/favicon.png",
+      "build": {
+        "babel": {
+          "include": ["rn-sliding-up-panel", "static-container"]
+        }
       }
     }
   }
