@@ -10,57 +10,158 @@ import {
   Keyboard,
   Button,
   ScrollView,
+  Animated,
+  Dimensions,
 } from "react-native";
 import Task from "./components/Task";
-import TaskScreen from './components/TaskScreen'
+import TaskScreen from "./components/TaskScreen";
 import HomeScreen from "./components/HomeScreen";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
-
-const CalendarScreen = () => <CalendarList />;
-
-const AgendaScreen = () => <Agenda />;
-
+import { useColorScheme } from "react-native";
 const Stack = createStackNavigator();
+import SlidingUpPanel from "rn-sliding-up-panel";
+import XDate from "xdate";
+import { useFonts, Inter_900Black } from "@expo-google-fonts/inter";
+import { EvilIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function App() {
+  const animatedValue = new Animated.Value(10);
+  const { height } = Dimensions.get("window");
+  const scheme = useColorScheme();
+  const INITIAL_DATE = "2021-07-01";
+  const todayDate = XDate.locales[XDate.defaultLocale].today;
+  const [selected, setSelected] = useState(todayDate);
+  const [showMarkedDatesExamples, setShowMarkedDatesExamples] = useState(false);
+  let [fontsLoaded] = useFonts({
+    Inter_900Black,
+  });
+
+  const toggleSwitch = () => {
+    setShowMarkedDatesExamples(!showMarkedDatesExamples);
+  };
+
+  const onDayPress = (day) => {
+    setSelected(day.dateString);
+  };
+
+  const getDisabledDates = (startDate, endDate, daysToDisable) => {
+    const disabledDates = {};
+    const start = XDate(startDate);
+    const end = XDate(endDate);
+
+    for (let m = XDate(start); m.diffDays(end) <= 0; m.addDays(1)) {
+      if (_.includes(daysToDisable, m.weekday())) {
+        disabledDates[m.toString("YYYY-MM-DD")] = { disabled: true };
+      }
+    }
+    return disabledDates;
+  };
+
+  const TopIcon = (onPress) => {
+    return (
+      <MaterialCommunityIcons name="drag-horizontal" size={24} color="black" />
+    );
+  };
+  const DownLogo = (onPress) => {
+    return <EvilIcons name="chevron-down" size={24} color="black" />;
+  };
+
   return (
     <View style={styles.mainScreen}>
       <View style={styles.mainTopScreen}>
         <Calendar
+          current={todayDate}
+          onDayPress={onDayPress}
           markedDates={{
-            "2021-07-16": {
+            [selected]: {
               selected: true,
-              marked: true,
-              selectedColor: "blue",
+              disableTouchEvent: true,
+              selectedColor: "#46BCFF",
+              selectedTextColor: "#FFFFFF",
             },
-            "2021-07-17": { marked: true },
-            "2021-07-18": { marked: true, dotColor: "red", activeOpacity: 0 },
-            "2021-07-19": { disabled: true, disableTouchEvent: true },
+          }}
+          theme={{
+            //todayTextColor: "#46BCFF",
+            // Inter_100Thin,
+            // Inter_200ExtraLight,
+            // Inter_300Light,
+            // Inter_400Regular,
+            // Inter_500Medium,
+            // Inter_600SemiBold,
+            // Inter_700Bold,
+            // Inter_800ExtraBold,
+            // Inter_900Black,
+            //calendarBackground: "#911",
+            //textDayFontFamily: "Inter_900Black",
+            textMonthFontFamily: "Inter_900Black",
+            //textDayHeaderFontFamily: "Inter_900Black",
+            textDayFontSize: 15,
+            textMonthFontSize: 20,
+            textDayHeaderFontSize: 10,
           }}
         />
       </View>
-      <View style={styles.mainBottomScreen}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="Tasks" component={TaskScreen} />
-            <Stack.Screen name="Calendar" component={CalendarScreen} />
-            <Stack.Screen name="Agenda" component={AgendaScreen} />
+
+      <SlidingUpPanel
+        animatedValue={animatedValue}
+        draggableRange={{ top: height - 100, bottom: height - 400 }}
+        snappingPoints={[360]}
+        height={height + 180}
+        friction={0.5}
+        style={styles.panel}
+      >
+        <NavigationContainer
+          theme={scheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              // headerShown: null,
+              headerStyle: {
+                backgroundColor: "#fafafa",
+                // header bottom bar
+                elevation: 0, //ios
+                shadowOpacity: 0, //android
+              },
+              //headerLeft: null,
+              headerBackTitleVisible: false,
+              shadowColor: "transparent",
+            }}
+          >
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              style={styles.panel}
+              options={{
+                headerTitle: () => <TopIcon />,
+                headerBackTitle: null,
+              }}
+            />
+            <Stack.Screen
+              name="Tasks"
+              component={TaskScreen}
+              options={{
+                headerTitle: () => <TopIcon />,
+                headerBackTitle: null,
+              }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
-      </View>
+      </SlidingUpPanel>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-
+  line: { height: 1, backgroundColor: "#911" },
   mainScreen: {
     flexDirection: "column",
     height: "100%",
@@ -70,9 +171,10 @@ const styles = StyleSheet.create({
   mainBottomScreen: {
     paddingTop: "0.3%",
     height: "65%",
-    backgroundColor: "#46BCFF",
+    backgroundColor: "#975",
   },
-
-  
-  
+  panel: {
+    backgroundColor: "#719",
+    height: "100%",
+  },
 });

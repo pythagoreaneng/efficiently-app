@@ -1,20 +1,32 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import Note from "./Note";
 
-const Note = (props) => {
+const NoteScreen = () => {
+  // const [note, setNote] = useState();
+  // const [noteItems, setNoteItems] = useState([]);
+
+  // const handleAddNote = () => {
+  //   Keyboard.dismiss;
+  //   setNoteItems([...noteItems, note]);
+  //   setNote(null);
+  // };
+
+  // const removeNote = (index) => {
+  //   let itemsCopy = [...noteItems];
+  //   itemsCopy.splice(index, 1);
+  //   setNoteItems(itemsCopy);
+  // };
+
   return (
-    <View style={styles.item}>
-      <View style={styles.itemLeft}>
-        <View style={styles.square}></View>
-        <Text style={styles.itemText}>{props.text}</Text>
-      </View>
-      <View style={styles.circular}></View>
+    <View>
+      <Text>Note Screen!</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
     
-  });
+});
   
-  export default Task;
+export default Note;
