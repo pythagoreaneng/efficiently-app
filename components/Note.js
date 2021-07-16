@@ -1,20 +1,25 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const Note = (props) => {
+const Note = ({noteText}) => {
   return (
-    <View style={styles.item}>
-      <View style={styles.itemLeft}>
-        <View style={styles.square}></View>
-        <Text style={styles.itemText}>{props.text}</Text>
-      </View>
-      <View style={styles.circular}></View>
+    <View style={styles.item}> 
+      <Text style={styles.text}>{noteText}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    
+  item: {
+    backgroundColor: "white",
+    padding: 15,
+    borderRadius: 5,
+    flexDirection: "row",
+    marginBottom: 25,
+  },
+  text: {
+    color: "red",
+  }
 });
 
 export default Note;

@@ -3,28 +3,24 @@ import {
   StyleSheet,
   Text,
   View,
-  KeyboardAvoidingView,
-  Platform,
-  TextInput,
   TouchableOpacity,
-  Keyboard,
-  Button,
   ScrollView,
-  Image,
 } from "react-native";
 
+// icons
 import { Octicons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
 const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.panelWrapper}>
-      <View style={styles.homeColWrapper}>
-        <View style={styles.homeRowWrapper}>
+      {/* 2 cols * 2 rows = 4 buttons */}
+      <View style={styles.colWrapper}>
+        {/* row #1 */}
+        <View style={styles.rowWrapper}>
           <TouchableOpacity
-            style={styles.homeButtonWrapper}
+            style={styles.buttonWrapper}
             onPress={() => navigation.navigate("Tasks")}
           >
             <Octicons name="inbox" size={42} color="#46BCFF" />
@@ -32,7 +28,7 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.homeButtonWrapper}
+            style={styles.buttonWrapper}
             onPress={() => navigation.navigate("Notes")}
           >
             <Octicons name="note" size={42} color="#FFE600" />
@@ -40,16 +36,17 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
 
         </View>
-        <View style={styles.homeRowWrapper}>
+        {/* row #2 */}
+        <View style={styles.rowWrapper}>
           <TouchableOpacity
-            style={styles.homeButtonWrapper}
+            style={styles.buttonWrapper}
             onPress={() => navigation.navigate("Tasks")}
           >
             <Feather name="repeat" size={42} color="#5EB672" />
             <Text style={styles.buttonCount}>0</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.homeButtonWrapper}
+            style={styles.buttonWrapper}
             onPress={() => navigation.navigate("Tasks")}
           >
             <FontAwesome name="search" size={42} color="#B4B1B1" />
@@ -62,11 +59,6 @@ const HomeScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  icon: {
-    height: "100%",
-    width: "100%",
-    backgroundColor: "#f1f1f1",
-  },
   buttonCount: {
     paddingTop: 5,
     color: "#46BCFF",
@@ -77,15 +69,15 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#fafafa",
   },
-  homeColWrapper: {
+  colWrapper: {
     flexDirection: "column",
   },
-  homeRowWrapper: {
+  rowWrapper: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     paddingTop: 30,
   },
-  homeButtonWrapper: {
+  buttonWrapper: {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
@@ -104,27 +96,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 3,
     elevation: 6,
-  },
-
-  taskWrapper: {
-    paddingTop: 20,
-    paddingHorizontal: 20,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#46BCFF",
-  },
-  items: {
-    marginTop: 30,
-  },
-  writeTaskWrapper: {
-    position: "absolute",
-    bottom: 400,
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
   },
 });
 
